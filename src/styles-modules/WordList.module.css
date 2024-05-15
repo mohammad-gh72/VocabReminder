@@ -1,0 +1,122 @@
+.WordList__ul {
+  overflow: hidden auto;
+  display: grid;
+  place-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 1.5rem;
+  margin-top: 3rem;
+  padding: 2rem;
+  background-color: #e6ecd7;
+  border-radius: 15px;
+}
+
+.WordListContainer {
+  position: relative;
+  overflow: hidden auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  background-color: #f5f5f5;
+  border-radius: 30px;
+}
+
+.WordList__add__header {
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  top: 0;
+  width: 100%;
+  height: 45px;
+  background-color: #c3d38a;
+  border-radius: 30px 30px 0 0;
+}
+
+.WordList__add__button {
+  cursor: pointer;
+  transform: translateX(-35px);
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  outline: none;
+  font-size: 40px;
+  font-weight: 600;
+  border: none;
+}
+
+.printIcon {
+  position: absolute;
+  left: 35px;
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+}
+.printIcon:hover {
+  transform: scale(1.1, 1.1);
+}
+.emptywordlistcontainer {
+  grid-column: 2;
+}
+.emptywordlistmessage {
+  padding: 0.5rem;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.WordList__add__button:hover {
+  font-size: 45px;
+}
+
+.sorting {
+  position: absolute;
+  right: 150px;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  .emptywordlistcontainer {
+    grid-column: 3;
+  }
+  .WordList__ul {
+    width: 100%;
+  }
+  .WordList__ul {
+    grid-template-columns: repeat(2, 1fr);
+    position: absolute;
+    top: 10px;
+  }
+}
+
+@media only screen and (max-width: 717px) {
+  .WordList__ul {
+    width: 100%;
+  }
+  .WordList__ul {
+    grid-template-columns: repeat(1, 1fr);
+    position: absolute;
+    top: 10px;
+  }
+}
+@media only screen and (max-width: 375px) {
+  .emptywordlistcontainer {
+    grid-column: 1;
+  }
+  .WordList__ul {
+    grid-template-columns: repeat(1, 100%);
+    position: absolute;
+    top: 10px;
+  }
+}
+@media only screen and (max-width: 540px) {
+  .emptywordlistcontainer {
+    grid-column: 1;
+  }
+  .WordList__ul {
+    grid-template-columns: repeat(1, 100%);
+    position: absolute;
+    top: 10px;
+  }
+}

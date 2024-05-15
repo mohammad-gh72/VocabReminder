@@ -1,0 +1,40 @@
+.pagination__back {
+  width: 20px;
+  height: 100px;
+  transform: scaleX(-1);
+  cursor: pointer;
+  position: fixed;
+  top: 50%;
+  left: 0;
+  border: none;
+  outline: none;
+  padding: 1rem;
+  z-index: 1;
+  opacity: 0.7;
+  border-radius: 5px;
+  font-weight: bold;
+  background-color: #e8b7b7;
+}
+.pagination__next {
+  width: 20px;
+  height: 100px;
+  cursor: pointer;
+  position: fixed;
+  top: 50%;
+  right: 0;
+  border: none;
+  outline: none;
+  padding: 1rem;
+  z-index: 1;
+  border-radius: 5px;
+  opacity: 0.7;
+  font-weight: bold;
+  background-color: #ecc5b3;
+}
+
+.pagination__back:hover {
+  opacity: 1;
+}
+.pagination__next:hover {
+  opacity: 1;
+}

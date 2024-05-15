@@ -1,0 +1,10 @@
+.selectorList__container {
+  z-index: 1;
+}
+.selectorList__container select {
+  border: none;
+  outline: none;
+  border: 1px solid rgba(48, 48, 48, 0.295);
+  border-radius: 10px;
+  padding: 0.2rem;
+}

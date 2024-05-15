@@ -1,0 +1,99 @@
+.word {
+  cursor: pointer;
+  position: relative;
+  width: 20rem;
+  height: 10rem;
+  background-color: #43a095;
+  border-radius: 10px;
+  margin: 1rem;
+
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.word:hover {
+  background-color: #faac24;
+}
+
+.word__bottLable {
+  position: absolute;
+  width: 100%;
+  height: 30%;
+  border-radius: 0 0 10px 10px;
+  bottom: 0;
+
+  background-color: #fdd590;
+}
+.word__bottLable:hover {
+  background-color: #dd4047;
+}
+
+.word__item {
+  padding: 1rem;
+  position: absolute;
+  top: 30px;
+}
+
+.word__edit {
+  border-radius: 0 0 10px 10px;
+  position: absolute;
+  left: 0;
+  width: 47px;
+}
+.word__edit:hover {
+  animation: editanimation 5s forwards;
+}
+
+@keyframes editanimation {
+  0% {
+    transform: scale(1, 1);
+    border-radius: 0 0 10px 10px;
+  }
+  5% {
+    transform: scale(0.93, 0.93);
+    border-radius: 5px 5px 10px 10px;
+  }
+  10% {
+    border-radius: 0 0 10px 10px;
+    transform: scale(1, 1);
+  }
+}
+
+.word__remove {
+  position: absolute;
+  right: 10px;
+  top: 12px;
+  width: 18px;
+}
+.word__remove:hover {
+  transform: scale(1.1, 1.1);
+}
+
+.voice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  background-color: #fdd590;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0 0 5px 0;
+}
+
+.selectedwords__container {
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+}
