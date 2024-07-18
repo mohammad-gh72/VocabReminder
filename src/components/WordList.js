@@ -3,7 +3,11 @@ import wordListStyle from "../styles-modules/WordList.module.css";
 import Slider from "./Slider";
 import printIcon from "../icons/print_icon.png";
 import Sorting from "./Sorting";
+import gifticon from "../icons/gift-box.png";
+import GiftWordsStyle from "../styles-modules/GiftWords.module.css";
+import fiveHundredFourWords from "../fiveHundredFourWords/fiveHundredFourWords.js";
 
+const giftWords = fiveHundredFourWords.map((items) => items);
 export default function WordList({
   onSelectedWord,
   onOpeningEdite,
@@ -20,6 +24,11 @@ export default function WordList({
   sortedArray,
   sorted,
   setSorted,
+  setWords,
+  setIsUsedGift,
+  isUsedGift,
+  words,
+  setIsStartAddingGiftWords,
 }) {
   //to check when we are in last page and we do remove all cards
   //then it should not stay in that empty page any more
@@ -57,7 +66,34 @@ export default function WordList({
           +
         </span>
 
+        {isUsedGift && (
+          <div className={GiftWordsStyle.giftParent}>
+            <div className={GiftWordsStyle.bgGift}>
+              <img
+                className={GiftWordsStyle.giftIcon}
+                src={gifticon}
+                alt="gift words"
+                onClick={() => {
+                  setIsStartAddingGiftWords(true);
+                  setWords((prev) => [...prev, ...giftWords]);
+                  setIsUsedGift(false);
+
+                  chrome.storage.local
+                    .set({ theWordList: [...giftWords, ...words] })
+                    .then(() => {
+                      setIsStartAddingGiftWords(false);
+                    });
+                }}
+              />
+              <p className={GiftWordsStyle.ptagGift}>
+                504 (english) flash cards will be added to your desk.
+              </p>
+            </div>
+          </div>
+        )}
+
         {/* opening print window */}
+
         <img
           role="button"
           className={wordListStyle.printIcon}

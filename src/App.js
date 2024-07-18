@@ -6,6 +6,8 @@ import AddWord from "./components/AddWord";
 import WordDetailsModal from "./components/WordDetailsModal";
 import PdfRender from "./components/PdfRender";
 import CardsPanelParent from "./components/CardsPanelParent";
+import GiftedWords from "./components/WaitingPage";
+import WaitingPage from "./components/WaitingPage";
 // import Advertisement from "./components/Advertisement";
 // export const vocabsList = [];
 
@@ -18,7 +20,8 @@ function App() {
   //because we alwayse in array methouds like map or filter should
   //check if the item we want to change in main word array (words state) is
   // equle to curentselectedword (our target card) or no
-
+  const [isStartAddingGiftWords, setIsStartAddingGiftWords] = useState(false);
+  const [isUsedGift, setIsUsedGift] = useState(true);
   const [isEditeOpen, setIsEditeOpen] = useState(false); //controling the closing
   //and opening of edite window
   const [isAddOpen, setIsAddOpen] = useState(false); //controling the closing
@@ -40,6 +43,18 @@ function App() {
   //in first place in the list and if he select 'normal' we render it as casual(the order
   //of the main words state))
   //----------------------------------------------
+
+  useEffect(() => {
+    chrome.storage.local.get("giftUsed", (res) => {
+      setIsUsedGift(res.giftUsed);
+    });
+  }, []);
+
+  useEffect(() => {
+    chrome.storage.local.set({ giftUsed: isUsedGift }).then(() => {
+      // console.log("gift value is set");
+    });
+  }, [isUsedGift]);
 
   //initilizing the sorted option user choosed
   //every time app runs , so it saves users chooses
@@ -87,7 +102,7 @@ function App() {
     setEndingPage(9);
   }, [sorted]);
 
-  //retriving all saved flashcards from chromes storage
+  // retriving all saved flashcards from chromes storage
   useEffect(() => {
     chrome.storage.local.get(["theWordList"], (result) => {
       if (result.theWordList) {
@@ -237,6 +252,11 @@ function App() {
               handleSelectedCardWithCheckBox={handleSelectedCardWithCheckBox}
               addWordToSpecialListWithCheckBox={handleSelectedWord}
               sortedArray={sortedArray}
+              setWords={setWords}
+              setIsUsedGift={setIsUsedGift}
+              isUsedGift={isUsedGift}
+              words={words}
+              setIsStartAddingGiftWords={setIsStartAddingGiftWords}
             />
           </div>
         </CardsPanelParent>
@@ -276,7 +296,7 @@ function App() {
           sorted={sorted}
         />
       )}
-
+      {isStartAddingGiftWords && <WaitingPage />}
       {/* advertizment part for when i want to add it back to the ui */}
       {/* {isPrintOpen || <Advertisement />} */}
     </div>
