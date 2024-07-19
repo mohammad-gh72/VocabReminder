@@ -6,7 +6,8 @@ import Sorting from "./Sorting";
 import gifticon from "../icons/gift-box.png";
 import GiftWordsStyle from "../styles-modules/GiftWords.module.css";
 import fiveHundredFourWords from "../fiveHundredFourWords/fiveHundredFourWords.js";
-
+import clearAllIcon from "../icons/clear all.png";
+import ClearAllStyle from "../styles-modules/ClearAll.module.css";
 const giftWords = fiveHundredFourWords.map((items) => items);
 export default function WordList({
   onSelectedWord,
@@ -29,6 +30,7 @@ export default function WordList({
   isUsedGift,
   words,
   setIsStartAddingGiftWords,
+  handleClearAll,
 }) {
   //to check when we are in last page and we do remove all cards
   //then it should not stay in that empty page any more
@@ -66,10 +68,24 @@ export default function WordList({
           +
         </span>
 
+        {/* clear all flashcards at once  */}
+        <div className={ClearAllStyle.clearParent}>
+          <img
+            title="clear all"
+            className={ClearAllStyle.clearImg}
+            src={clearAllIcon}
+            alt="clear all flash cards"
+            srcset=""
+            onClick={handleClearAll}
+          />
+        </div>
+
+        {/* adding gift words part */}
         {isUsedGift && (
           <div className={GiftWordsStyle.giftParent}>
             <div className={GiftWordsStyle.bgGift}>
               <img
+                title="gift"
                 className={GiftWordsStyle.giftIcon}
                 src={gifticon}
                 alt="gift words"

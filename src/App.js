@@ -8,6 +8,7 @@ import PdfRender from "./components/PdfRender";
 import CardsPanelParent from "./components/CardsPanelParent";
 import GiftedWords from "./components/WaitingPage";
 import WaitingPage from "./components/WaitingPage";
+import { func } from "prop-types";
 // import Advertisement from "./components/Advertisement";
 // export const vocabsList = [];
 
@@ -186,6 +187,15 @@ function App() {
         // console.log("Selected Value gets updated");
       });
   }
+
+  function handleClearAll() {
+    setWords([]);
+
+    chrome.storage.local.set({ theWordList: [] }).then(() => {
+      // console.log("Value is set");
+    });
+    setIsUsedGift(true);
+  }
   //----------------------------
   //this part holds functions that gonna control
   //the isopening states for each tool in our application
@@ -257,6 +267,7 @@ function App() {
               isUsedGift={isUsedGift}
               words={words}
               setIsStartAddingGiftWords={setIsStartAddingGiftWords}
+              handleClearAll={handleClearAll}
             />
           </div>
         </CardsPanelParent>

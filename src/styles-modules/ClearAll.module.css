@@ -1,0 +1,13 @@
+.clearParent {
+  position: absolute;
+  top: 3.9px;
+  left: 80px;
+}
+
+.clearImg {
+  cursor: pointer;
+  width: 35px;
+}
+.clearImg:hover {
+  transform: scale(1.1);
+}
