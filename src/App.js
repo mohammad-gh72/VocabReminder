@@ -108,6 +108,7 @@ function App() {
       //in normal way in assending ordessending order
       setStartingPage(0);
       setEndingPage(9);
+      setSearchInput("");
       setSortedArray(words.slice().filter((word) => word.selected === true));
     }
     if (!sortedArray?.length && sorted === "normal") {
