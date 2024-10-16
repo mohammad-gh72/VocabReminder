@@ -86,6 +86,8 @@ function App() {
     //and words state is not empty we do this
     if (words && sorted === "normal") {
       if (searchInput) {
+        setStartingPage(0);
+        setEndingPage(9);
         setSortedArray(
           words.filter((word) =>
             word.word
