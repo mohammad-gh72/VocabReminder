@@ -8,7 +8,9 @@ import PdfRender from "./components/PdfRender";
 import CardsPanelParent from "./components/CardsPanelParent";
 import GiftedWords from "./components/WaitingPage";
 import WaitingPage from "./components/WaitingPage";
+import Advertisement from "./components/Advertisement";
 import { func } from "prop-types";
+
 // import Advertisement from "./components/Advertisement";
 // export const vocabsList = [];
 
@@ -43,6 +45,10 @@ function App() {
   // chooice pinned in selection box we render in a way that pinned cards will be
   //in first place in the list and if he select 'normal' we render it as casual(the order
   //of the main words state))
+
+  // search input state
+  const [searchInput, setSearchInput] = useState("");
+
   //----------------------------------------------
 
   useEffect(() => {
@@ -79,7 +85,18 @@ function App() {
     //if user choosed normal (that is value is 'normal' in select list)
     //and words state is not empty we do this
     if (words && sorted === "normal") {
-      setSortedArray(words);
+      if (searchInput) {
+        setSortedArray(
+          words.filter((word) =>
+            word.word
+              .trim()
+              .toLowerCase()
+              .startsWith(searchInput.trim().toLowerCase())
+          )
+        );
+      } else {
+        setSortedArray(words);
+      }
     }
     //if user choosed pinned (that is value is 'pinned' in select list)
     //and words state is not empty we do this
@@ -87,21 +104,31 @@ function App() {
       //changing true and false to numbers makes them to be
       //true =1 and false =0 , so then we can do sort array methoud on it
       //in normal way in assending ordessending order
+      setStartingPage(0);
+      setEndingPage(9);
       setSortedArray(words.slice().filter((word) => word.selected === true));
     }
-  }, [words, sorted]); // in [words, sorted] we track both words and sorted cahnges
+    if (!sortedArray?.length && sorted === "normal") {
+      setStartingPage(0);
+      setEndingPage(9);
+    }
+  }, [words, sorted, searchInput, sortedArray?.length]); // in [words, sorted] we track both words and sorted cahnges
   //so useEffect know when it should re-REnder (words because if user adds new word so now the
   //sortedArray state should get updated to the new value) and (sorted for chking the new order
   // of cards in view base on users choose)
 
   //-------------------------
 
-  //initialize the pagination (start and ending page ) to
-  //their initial values if we user toggled between sorting list
-  useEffect(() => {
-    setStartingPage(0);
-    setEndingPage(9);
-  }, [sorted]);
+  // useEffect(() => {
+  //   setSortedArray(
+  //     words.filter((word) =>
+  //       word.word
+  //         .trim()
+  //         .toLowerCase()
+  //         .startsWith(searchInput.trim().toLowerCase())
+  //     )
+  //   );
+  // }, [searchInput]);
 
   // retriving all saved flashcards from chromes storage
   useEffect(() => {
@@ -117,6 +144,7 @@ function App() {
   //, after the initial render
 
   //--------------------------
+
   //functionality for adding new word
   function handleAddWord(newWord) {
     setWords((words) => [newWord, ...words]);
@@ -194,6 +222,13 @@ function App() {
     chrome.storage.local.set({ theWordList: [] }).then(() => {
       // console.log("Value is set");
     });
+
+    chrome.storage.local
+      .set({ startingPage: 0, endingPage: 9, currentPageNumber: 1 })
+      .then(() => {
+        // console.log("Values are set");
+      });
+
     setIsUsedGift(true);
   }
   //----------------------------
@@ -268,6 +303,8 @@ function App() {
               words={words}
               setIsStartAddingGiftWords={setIsStartAddingGiftWords}
               handleClearAll={handleClearAll}
+              searchInput={searchInput}
+              setSearchInput={setSearchInput}
             />
           </div>
         </CardsPanelParent>
@@ -294,6 +331,7 @@ function App() {
           setEndingPage={setEndingPage}
         />
       )}
+
       {isModalOpen && (
         <WordDetailsModal
           onCard={currentSelectedWord}
@@ -305,11 +343,12 @@ function App() {
           onOpeningPrint={handleIsPrintOpen}
           sortedArray={sortedArray}
           sorted={sorted}
+          searchInput={searchInput}
         />
       )}
       {isStartAddingGiftWords && <WaitingPage />}
       {/* advertizment part for when i want to add it back to the ui */}
-      {/* {isPrintOpen || <Advertisement />} */}
+      {isPrintOpen || <Advertisement />}
     </div>
   );
 }

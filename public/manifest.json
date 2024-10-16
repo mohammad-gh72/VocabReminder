@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Vocab Reminder",
-  "version": "1.2",
+  "version": "1.3",
   "description": "Create, customize, and manage flashcards with meanings, explanations, and examples. Pin, organize, and print for easy study sessions",
   "action": {
     "default_popup": "",

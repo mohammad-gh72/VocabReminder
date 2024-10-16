@@ -8,6 +8,9 @@ import GiftWordsStyle from "../styles-modules/GiftWords.module.css";
 import fiveHundredFourWords from "../fiveHundredFourWords/fiveHundredFourWords.js";
 import clearAllIcon from "../icons/clear all.png";
 import ClearAllStyle from "../styles-modules/ClearAll.module.css";
+import SearchWord from "./SearchWord.js";
+import SearchWordStyle from "../styles-modules/SearchWord.module.css";
+
 const giftWords = fiveHundredFourWords.map((items) => items);
 export default function WordList({
   onSelectedWord,
@@ -31,6 +34,8 @@ export default function WordList({
   words,
   setIsStartAddingGiftWords,
   handleClearAll,
+  searchInput,
+  setSearchInput,
 }) {
   //to check when we are in last page and we do remove all cards
   //then it should not stay in that empty page any more
@@ -67,7 +72,15 @@ export default function WordList({
         >
           +
         </span>
-
+        {/* searching word */}
+        {sorted === "normal" && (
+          <div className={SearchWordStyle.parent}>
+            <SearchWord
+              searchInput={searchInput}
+              setSearchInput={setSearchInput}
+            />
+          </div>
+        )}
         {/* clear all flashcards at once  */}
         <div className={ClearAllStyle.clearParent}>
           <img
@@ -79,7 +92,6 @@ export default function WordList({
             onClick={handleClearAll}
           />
         </div>
-
         {/* adding gift words part */}
         {isUsedGift && (
           <div className={GiftWordsStyle.giftParent}>
@@ -107,9 +119,7 @@ export default function WordList({
             </div>
           </div>
         )}
-
         {/* opening print window */}
-
         <img
           role="button"
           className={wordListStyle.printIcon}
@@ -119,17 +129,24 @@ export default function WordList({
           onClick={onOpeningPrint} //opening the print windows (props functionality
           //comews from App component)
         />
-
         {/* sorting component */}
         <div className={wordListStyle.sorting}>
           <Sorting sorted={sorted} setSorted={setSorted} />
         </div>
       </div>
+
       <ul className={wordListStyle.WordList__ul}>
         {/* if words array is empty (if there is no word (basicly if words state 
         in App is empty)) show a message otherwise 
         do the rest */}
-        {listOfWords.length === 0 ? (
+
+        {searchInput && sortedArray.length === 0 && sorted === "normal" ? (
+          <div className={wordListStyle.emptywordlistcontainer}>
+            <p className={wordListStyle.emptywordlistmessage}>
+              No matching flashcards found.
+            </p>
+          </div>
+        ) : listOfWords.length === 0 ? (
           <div className={wordListStyle.emptywordlistcontainer}>
             <p className={wordListStyle.emptywordlistmessage}>
               To begin, add your first word by clicking the add button (+)

@@ -1,6 +1,11 @@
 import PdfStyle from "../styles-modules/PdfRender.module.css";
 
-export default function PdfRender({ sortedArray, sorted, onOpeningPrint }) {
+export default function PdfRender({
+  sortedArray,
+  sorted,
+  onOpeningPrint,
+  searchInput,
+}) {
   let printingMode;
   if (sorted === "normal") {
     printingMode = "All";
@@ -36,13 +41,22 @@ export default function PdfRender({ sortedArray, sorted, onOpeningPrint }) {
         >
           &times;
         </span>
-        <p style={{ marginTop: "1.5rem" }}>
-          Notice that you are printing&nbsp;
-          <strong style={{ textDecoration: "underline" }}>
-            {printingMode}
-          </strong>
-          &nbsp;words
-        </p>
+        {searchInput.trim() && sortedArray ? (
+          <p style={{ marginTop: "1.5rem" }}>
+            Notice that you are printing&nbsp;
+            <strong style={{ textDecoration: "underline" }}>
+              Based on your search
+            </strong>
+          </p>
+        ) : (
+          <p style={{ marginTop: "1.5rem" }}>
+            Notice that you are printing&nbsp;
+            <strong style={{ textDecoration: "underline" }}>
+              {printingMode}
+            </strong>
+            &nbsp;words
+          </p>
+        )}
       </div>
 
       <div className={PdfStyle.pdfContainer}>

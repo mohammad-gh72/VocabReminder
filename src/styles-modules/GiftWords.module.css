@@ -79,8 +79,8 @@
 @media screen and (max-width: 1220px) {
   .giftParent {
     position: relative;
-    width: 50%;
+    width: 47%;
     height: 100%;
-    transform: translateX(-350px);
+    transform: translateX(-435px);
   }
 }

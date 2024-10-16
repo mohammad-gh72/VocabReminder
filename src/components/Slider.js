@@ -8,6 +8,9 @@ export default function Slider({
 }) {
   //functionality of (next) button in pagination
   function handleNextBtn() {
+    //the initializer (to chrome storage) for current navigated page
+    // handleSaveNavigatedPage();
+
     //as long as the endingpage state (that comes from APP component)
     //is greater or =  comparing to the length of our card's bank array state
     //which is basicly this line in App component -
@@ -37,6 +40,9 @@ export default function Slider({
 
   //functionality of (prev) button in pagination
   function handleBackBtn() {
+    //the initializer (to chrome storage) for current navigated page
+    // handleSaveNavigatedPage();
+
     //if the starting page state become less than or = 0 so it means
     //that we are at the starting point of array
     //so there is nothing any more if we click on (prev button)
