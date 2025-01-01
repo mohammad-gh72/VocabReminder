@@ -11,3 +11,17 @@
 .clearImg:hover {
   transform: scale(1.1);
 }
+
+.clearAllGiftsParent {
+  position: absolute;
+  top: 2.5px;
+  left: 135px;
+}
+
+.clearAllGiftsParent img {
+  cursor: pointer;
+  width: 33px;
+}
+.clearAllGiftsParent img:hover {
+  transform: scale(1.1);
+}

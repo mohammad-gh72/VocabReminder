@@ -12,9 +12,13 @@
   text-align: center;
   /* border-radius: 0 0 15px 15px; */
   position: relative;
-  display: flex;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: start;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
 }
 
 .textsParent {
@@ -59,6 +63,16 @@
   color: aliceblue;
 }
 
+.hideTelegram {
+  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 6px;
+  cursor: pointer;
+  z-index: 99999999999999;
+}
+
 @media only screen and (max-width: 425px) {
   .slogan {
     word-wrap: break-word;
@@ -74,6 +88,9 @@
   .bonus {
     font-size: 10px;
     color: aliceblue;
+  }
+  .hideTelegram {
+    display: none;
   }
 }
 @media only screen and (max-width: 375px) {
@@ -97,10 +114,21 @@
     font-size: 12px;
     color: aliceblue;
   }
+  .hideTelegram {
+    display: none;
+  }
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 706px) {
   .adParent {
+    display: none;
+  }
+  .hideTelegram {
+    display: none;
+  }
+}
+@media screen and (max-width: 768px) {
+  .hideTelegram {
     display: none;
   }
 }

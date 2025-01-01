@@ -1,5 +1,5 @@
 import advertisementStyle from "../styles-modules/Advertisement.module.css";
-
+import TelegramIcon from "../icons/telegram.png";
 export default function Advertisement() {
   return (
     <div className={advertisementStyle.adParent}>
@@ -21,14 +21,36 @@ export default function Advertisement() {
               transform: "translateY(-1px)",
             }}
           >
-            Enjoying the app?&nbsp;
+            Enjoying the app? Please&nbsp;
           </strong>
-          Rate and review it to support me and help others discover it!
+          Rate and review it to support me and help others discover it.&nbsp;
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://chromewebstore.google.com/detail/vocab-reminder/gnckbcdhafjkkhbmonlaiokdahbfpgng"
+          >
+            Here
+          </a>
         </p>
+
         {/* <p className={advertisementStyle.email}>
           Contact me : ghmailbox72@gmail.com
         </p> */}
       </span>
+      <div className={advertisementStyle.hideTelegram}>
+        <a
+          href="https://t.me/+Dzl-AeLmn7FhZTM8"
+          target="_blank"
+          rel="noopener noreferrer" // Added for security
+        >
+          <img
+            title="Get aware of updates on the Telegram channel"
+            style={{ width: "20px" }}
+            src={TelegramIcon}
+            alt="Telegram"
+          />
+        </a>
+      </div>
     </div>
   );
 }

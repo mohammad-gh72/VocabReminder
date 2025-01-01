@@ -12,6 +12,7 @@ export default function Word({
   onOpeningEdite,
   onRemove,
   onCheckLastPageAfterItemRemoval,
+  checkLastPageAfterItemRemovalForPinnedPanel,
   addWordToSpecialListWithCheckBox,
   handleSelectedCardWithCheckBox,
 }) {
@@ -147,6 +148,7 @@ export default function Word({
             onCheckLastPageAfterItemRemoval(); //it functionality is located in
             //WordList component, so there , i wrote completly what it doing
             //but here we control it on each indivisual card when we do deleting cards
+            checkLastPageAfterItemRemovalForPinnedPanel();
           }}
         />
       </div>

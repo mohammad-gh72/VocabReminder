@@ -5,6 +5,9 @@ export default function Slider({
   startingPage,
   endingPage,
   sortedArray,
+  bgColor,
+  fontColor,
+  handleSavePageNumber,
 }) {
   //functionality of (next) button in pagination
   function handleNextBtn() {
@@ -75,12 +78,26 @@ export default function Slider({
   return (
     <>
       {startingPage > 0 && (
-        <button className={style.pagination__back} onClick={handleBackBtn}>
+        <button
+          className={style.pagination__back}
+          onClick={() => {
+            handleBackBtn();
+            handleSavePageNumber(startingPage - 9, startingPage);
+          }}
+          style={{ backgroundColor: bgColor, color: fontColor }}
+        >
           &#10140;
         </button>
       )}
       {endingPage < sortedArray?.length && (
-        <button className={style.pagination__next} onClick={handleNextBtn}>
+        <button
+          className={style.pagination__next}
+          onClick={() => {
+            handleNextBtn();
+            handleSavePageNumber(endingPage, endingPage + 9);
+          }}
+          style={{ backgroundColor: bgColor, color: fontColor }}
+        >
           &#10140;
         </button>
       )}

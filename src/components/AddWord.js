@@ -80,8 +80,8 @@ export default function AddWord({
       onOpeningAdd(); //it also comes from App as a handler function, to check when we press Add
       //button so it set (setIsAddOpen) into false to closing the add window
       //and let user back into main window (Cards window)
-      setStartingPage(0); //initializing pagination start point (from index 0)
-      setEndingPage(9); //initializing pagination end point (to index 9) (we only show 9 cards in eaach page)
+      // setStartingPage(0); //initializing pagination start point (from index 0)
+      // setEndingPage(9); //initializing pagination end point (to index 9) (we only show 9 cards in eaach page)
     }
   }
 

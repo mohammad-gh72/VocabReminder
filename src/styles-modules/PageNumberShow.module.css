@@ -1,0 +1,16 @@
+.parent {
+  width: 100%;
+  background-color: #fbecdb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 45px;
+  padding: 5px;
+}
+
+@media screen and (max-width: 1024px) {
+  .parent {
+    display: none;
+  }
+}

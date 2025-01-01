@@ -48,7 +48,8 @@ function App() {
 
   // search input state
   const [searchInput, setSearchInput] = useState("");
-
+  const [pinSectionStartingPage, setPinSectionStartingPage] = useState(0);
+  const [pinSectionEndinggPage, setPinSectionEndinggPage] = useState(9);
   //----------------------------------------------
 
   useEffect(() => {
@@ -106,14 +107,14 @@ function App() {
       //changing true and false to numbers makes them to be
       //true =1 and false =0 , so then we can do sort array methoud on it
       //in normal way in assending ordessending order
-      setStartingPage(0);
-      setEndingPage(9);
+      // setStartingPage(0);
+      // setEndingPage(9);
       setSearchInput("");
       setSortedArray(words.slice().filter((word) => word.selected === true));
     }
     if (!sortedArray?.length && sorted === "normal") {
-      setStartingPage(0);
-      setEndingPage(9);
+      // setStartingPage(0);
+      // setEndingPage(9);
     }
   }, [words, sorted, searchInput, sortedArray?.length]); // in [words, sorted] we track both words and sorted cahnges
   //so useEffect know when it should re-REnder (words because if user adds new word so now the
@@ -148,12 +149,61 @@ function App() {
 
   //--------------------------
 
+  // getting the saved pagenumbers for normal panel
+  useEffect(() => {
+    // Retrieve both starting and ending page numbers in one go
+    chrome.storage.local.get(
+      ["startingPageNumber", "endingPageNumber"],
+      (result) => {
+        if (result.startingPageNumber !== undefined) {
+          setStartingPage(Number(result.startingPageNumber));
+        }
+        if (result.endingPageNumber !== undefined) {
+          setEndingPage(Number(result.endingPageNumber));
+        }
+      }
+    );
+  }, []);
+  // getting the saved pagenumbers for pinned panel
+  useEffect(() => {
+    // Retrieve both starting and ending page numbers in one go
+    chrome.storage.local.get(
+      ["startingPageNumberForPinned", "endingPageNumberForpinned"],
+      (result) => {
+        if (result.startingPageNumberForPinned !== undefined) {
+          setPinSectionStartingPage(Number(result.startingPageNumberForPinned));
+        }
+        if (result.endingPageNumberForpinned !== undefined) {
+          setPinSectionEndinggPage(Number(result.endingPageNumberForpinned));
+        }
+      }
+    );
+  }, []);
+
   //functionality for adding new word
   function handleAddWord(newWord) {
     setWords((words) => [newWord, ...words]);
 
     chrome.storage.local.set({ theWordList: [newWord, ...words] }).then(() => {
       // console.log("Value is set");
+    });
+  }
+  //functionality for saving PageNumber
+  function handleSavePageNumber(starting, ending) {
+    if (searchInput) return;
+
+    chrome.storage.local.set({
+      startingPageNumber: starting,
+      endingPageNumber: ending,
+    });
+  }
+  //functionality for saving PageNumber for pined cards
+  function handleSavePageNumberForPinCards(starting, ending) {
+    // if (searchInput) return;
+
+    chrome.storage.local.set({
+      startingPageNumberForPinned: starting,
+      endingPageNumberForpinned: ending,
     });
   }
 
@@ -233,6 +283,9 @@ function App() {
       });
 
     setIsUsedGift(true);
+    setStartingPage(0);
+    setEndingPage(9);
+    handleSavePageNumber(0, 9);
   }
   //----------------------------
   //this part holds functions that gonna control
@@ -285,6 +338,12 @@ function App() {
             }}
           >
             <WordList
+              handleSavePageNumber={handleSavePageNumber}
+              handleSavePageNumberForPinCards={handleSavePageNumberForPinCards}
+              pinSectionStartingPage={pinSectionStartingPage}
+              pinSectionEndinggPage={pinSectionEndinggPage}
+              setPinSectionStartingPage={setPinSectionStartingPage}
+              setPinSectionEndinggPage={setPinSectionEndinggPage}
               onOpeningAdd={handleisAddOpen}
               listOfWords={words}
               setStartingPage={setStartingPage}

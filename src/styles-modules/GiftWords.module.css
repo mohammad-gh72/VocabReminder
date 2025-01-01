@@ -3,13 +3,15 @@
   width: 50%;
   height: 100%;
   transform: translateX(-450px);
+  display: flex;
+  align-items: center;
 }
 
 .bgGift {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: antiquewhite;
+  background-color: #fff2da;
   left: 0;
 }
 .giftIcon {
@@ -31,10 +33,63 @@
   left: 85px;
 }
 
+.close {
+  border: none;
+  outline: none;
+  margin-right: 1rem;
+  background-color: transparent;
+  font-size: 18px;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  z-index: 9999999999999999999;
+}
+.close:hover {
+  font-size: 20px;
+}
+
+.showGiftPanel {
+  transform-origin: left;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #fff2da;
+  left: 0;
+  transition: all 0.5s ease;
+  overflow: hidden;
+}
+.closeGiftPanel {
+  transform-origin: right;
+  position: absolute;
+  width: 0;
+  height: 100%;
+  background-color: #fff2da;
+  left: 0;
+  transition: all 0.8s ease;
+  overflow: hidden;
+}
+
+.openBtn {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #3b3737;
+  cursor: pointer;
+  font-size: 25px;
+  padding: 8px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  transform: translateX(-50px);
+}
+.openBtn:hover {
+  font-size: 27px;
+}
+
 @media screen and (max-width: 1024px) {
   .ptagGift {
     display: none;
   }
+
   /* --------- */
 
   .giftParent {
@@ -82,5 +137,16 @@
     width: 47%;
     height: 100%;
     transform: translateX(-435px);
+  }
+}
+
+/* @media screen and (min-width: 2560px) {
+  .openBtn {
+    transform: translateX(-650px);
+  }
+} */
+@media screen and (min-width: 2560px) {
+  .openBtn {
+    transform: translateX(-650px);
   }
 }
