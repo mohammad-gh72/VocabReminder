@@ -52,6 +52,8 @@ export default function WordList({
   const giftCloseBtnRef = useRef();
   let newWordList = [];
   function clearAllGifts() {
+    setSearchInput("");
+
     handleSavePageNumber(0, 9);
     handleSavePageNumberForPinCards(0, 9);
     newWordList = listOfWords?.filter((cart) => !("type" in cart));
@@ -75,6 +77,7 @@ export default function WordList({
         }
       }
     );
+
     if (listOfWords.length === 0) {
       chrome.storage.local
         .set({ startingPage: 0, endingPage: 9, currentPageNumber: 1 })
@@ -85,7 +88,13 @@ export default function WordList({
       setStartingPage(0);
       setEndingPage(9);
     }
+    window.location.reload();
   }
+
+  // useEffect(() => {
+  //   handleSavePageNumber(0, 9);
+  //   handleSavePageNumberForPinCards(0, 9);
+  // }, giftWords.length);
 
   function handleGiftClose() {
     // giftCloseDivRef.current.classList.remove(GiftWordsStyle.showGiftPanel);
@@ -167,7 +176,9 @@ export default function WordList({
               title="Clear all gift flashcards only"
               src={clearallgiftflashcards}
               alt="Clear all gift flashcards only"
-              onClick={clearAllGifts}
+              onClick={() => {
+                clearAllGifts();
+              }}
             />
           </div>
         )}
@@ -262,6 +273,9 @@ export default function WordList({
                   : startingPage / 9 + 1
               }
               isOnSearch={searchInput ? true : false}
+              setStartPage={setStartingPage}
+              setEndPage={setEndingPage}
+              handleSavePageNumber={handleSavePageNumber}
             />
           )}
           <Slider
@@ -354,6 +368,9 @@ export default function WordList({
               }
               isOnSearch={searchInput ? true : false}
               ispinnedSort={true}
+              setStartPage={setPinSectionStartingPage}
+              setEndPage={setPinSectionEndinggPage}
+              handleSavePageNumber={handleSavePageNumberForPinCards}
             />
           )}
           <Slider

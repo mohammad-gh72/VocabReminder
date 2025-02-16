@@ -50,6 +50,7 @@ function App() {
   const [searchInput, setSearchInput] = useState("");
   const [pinSectionStartingPage, setPinSectionStartingPage] = useState(0);
   const [pinSectionEndinggPage, setPinSectionEndinggPage] = useState(9);
+
   //----------------------------------------------
 
   useEffect(() => {
@@ -87,8 +88,8 @@ function App() {
     //and words state is not empty we do this
     if (words && sorted === "normal") {
       if (searchInput) {
-        setStartingPage(0);
-        setEndingPage(9);
+        // setStartingPage(0);
+        // setEndingPage(9);
         setSortedArray(
           words.filter((word) =>
             word.word
@@ -197,6 +198,7 @@ function App() {
       endingPageNumber: ending,
     });
   }
+
   //functionality for saving PageNumber for pined cards
   function handleSavePageNumberForPinCards(starting, ending) {
     // if (searchInput) return;
@@ -228,6 +230,21 @@ function App() {
 
   //functionality for removing a card
   function handleRemoveWord(curentIdYouWantToRemove) {
+    if (words.length === 1) {
+      handleSavePageNumber(0, 9);
+      chrome.storage.local.get(
+        ["startingPageNumber", "endingPageNumber"],
+        (result) => {
+          if (result.startingPageNumber !== undefined) {
+            setStartingPage(Number(result.startingPageNumber));
+          }
+          if (result.endingPageNumber !== undefined) {
+            setEndingPage(Number(result.endingPageNumber));
+          }
+        }
+      );
+      // window.location.reload();
+    }
     setWords((words) =>
       words.filter((word) => word?.id !== curentIdYouWantToRemove)
     );

@@ -23,6 +23,11 @@ function SearchWord({
     }
   }
 
+  function backStartingPageAndEndingPageToDefaultSoItCanSearchAmoungAllFlashCards() {
+    setStartingPage(0);
+    setEndingPage(9);
+  }
+
   useEffect(() => {
     ifInputGetsEmptyBackToLastSavedPagedNumber();
   }, [searchInputEmpty]);
@@ -34,6 +39,7 @@ function SearchWord({
       placeholder="Search for a word ..."
       onChange={(e) => {
         setSearchInput(e.target.value);
+        backStartingPageAndEndingPageToDefaultSoItCanSearchAmoungAllFlashCards();
       }}
     />
   );
